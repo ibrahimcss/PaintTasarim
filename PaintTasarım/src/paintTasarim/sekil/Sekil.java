@@ -43,6 +43,8 @@ public abstract class Sekil extends Rectangle {
             g2.drawRect(x - 5, y - 5, width + 10, height + 10);
             g2.setStroke(stroke);
         }
+         Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(ozellik.kalinlik));
     }
 
     public void guncelle() {

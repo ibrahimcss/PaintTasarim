@@ -32,6 +32,7 @@ public class MyCanvas extends Canvas implements MouseMotionListener, MouseListen
      Color cizgiRenk;
     int doluRenk = 2;
     boolean isDolu = false;
+    int kalinlik;
 
     ArrayList<Sekil> List = new ArrayList();
     ArrayList<Sekil> silinenlist = new ArrayList<>();
@@ -40,7 +41,9 @@ public class MyCanvas extends Canvas implements MouseMotionListener, MouseListen
     //Siyah, Beyaz, Sarı, Kırmızı, Mavi, Gri, Pembe, Magenta, Cyan
 
     boolean isSecimEnabled = false;
-
+   void setKalinlik(int kalinlik) {
+        this.kalinlik = kalinlik;
+    }
     public enum CIZIM_MODU {
         KARE(Kare.class), DIKDORTGEN (Dikdortgen.class), COKLUCIZGI(CokluCizgi.class), CIZGI(Cizgi.class), OVAL(Oval.class), YAY(Yay.class), YILDIZ(Yildiz.class),
         UCGEN(Ucgen.class), DIKUCGEN(DikUcgen.class), YUVARLAKDORTGEN(YuvarlakDortgen.class), BESGEN(Besgen.class),ROKET(Roket.class);
@@ -55,6 +58,8 @@ public class MyCanvas extends Canvas implements MouseMotionListener, MouseListen
             return className;
         }
     }
+    
+ 
 
     CIZIM_MODU suankiMod = CIZIM_MODU.CIZGI;
     ArrayList<Sekil> list = new ArrayList();
@@ -140,10 +145,7 @@ public class MyCanvas extends Canvas implements MouseMotionListener, MouseListen
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Ozellik ozellik = new Ozellik();
-        ozellik.cizgiRengi = cizgiRenk;
-        ozellik.isDolu = isDolu;
-
+        
         
         try
         {
@@ -161,6 +163,10 @@ public class MyCanvas extends Canvas implements MouseMotionListener, MouseListen
             }
             else
             {
+          Ozellik ozellik = new Ozellik();
+        ozellik.cizgiRengi = cizgiRenk;
+        ozellik.isDolu = isDolu;
+        ozellik.kalinlik=kalinlik;
                 Sekil yeni = (Sekil) suankiMod.getClassName().getConstructor(Point.class, Point.class, Ozellik.class).newInstance(e.getPoint(), e.getPoint(), ozellik);
                 List.add(yeni);
             }
